@@ -1,0 +1,62 @@
+.pictures{
+    box-shadow: 0 0 0.2em darkgrey;
+    width: 30%;
+    height:400px;
+    float: left;
+    margin-left:2%;
+}
+.viewMobile{
+    margin-top:2%;
+}
+.thumbnailPic{
+    width:100%;
+}
+.thumbnail{
+    width:30%;
+    float:left;
+}
+.thumbnailPic:hover{
+    border:2px solid blue;
+}
+.listImage{
+    width:100%;
+}
+.listImage:hover{
+    cursor: pointer;
+}
+.preview{
+    float: left;
+    width:60%;
+    height:240px;
+}
+.viwedImg{
+    width:100%;
+    height: 100%;
+}
+.specs{
+    margin-left:2%;
+    float: left;
+    width:60%;
+}
+.cart
+{
+    width: 4%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.cartQty{
+    left: 47%;
+    position: absolute;
+    background-color: white;
+    border-radius: 74%;
+    top: 13%;
+    height: 40%;
+    width: 40%;
+    text-align: center;
+}
+.button{
+    margin-right:2%;
+    margin-top:1%;
+    margin-left:2%;
+}

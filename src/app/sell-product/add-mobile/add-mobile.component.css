@@ -1,0 +1,26 @@
+.addMobile
+{
+    position: absolute;
+    background-color: azure;
+    box-shadow: 0 0 1em;
+    top:10%;
+}
+.row {
+    margin:15px 0;
+  }
+.mobileSection
+{
+    margin-left: 9%;
+    margin-top: 2%;
+    margin-right: 9%;
+}
+label {
+    margin-bottom: 0;
+    margin-left: 1px;
+}
+.cross
+{
+    font-size:2em;
+    float:right;
+    margin-top:-2%;
+}

@@ -1,0 +1,44 @@
+<div class="col-md-3">
+  <button class="btn btn-primary btn-lg col-md-6"><i class="fa fa-plus-square-o plusIcon" (click)="addMobile()" aria-hidden="true"></i></button>
+</div>
+<div>
+  <app-add-mobile [showMePartially]="showVar"></app-add-mobile>
+</div>
+<!-- <img [src]="singleImg[1]" > -->
+<div style="margin-top:5px">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Operating System</th>
+        <th>Specification</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Edit/Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mobile of mobiles;let i = index" >
+        <td>{{i}}</td>
+        <td>{{mobile.name}}</td>
+        <td>{{mobile.manufacturer}}</td>
+        <td>{{mobile.os}} {{mobile.version}}</td>
+        <td>
+          <ul>
+            <li>{{mobile.ram}} GB RAM {{mobile.internal}} GB Internal Storage | Expandable upto {{mobile.expandable}} GB </li>
+            <li>{{mobile.battery}} mAh </li>
+            <li> {{mobile.width}} x {{mobile.depth}} x {{mobile.height}} </li>
+          </ul>
+        </td>
+        <td>{{mobile.stock}}</td>
+        <td> {{mobile.price}} </td>
+        <td>
+           <button class="btn btn-success adminChoice" (click)="editMobileData(i)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+           <button class="btn btn-warning adminChoice" (click)="deleteMobile(mobile.mobile_id)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

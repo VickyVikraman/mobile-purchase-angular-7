@@ -1,0 +1,55 @@
+<div class="carting">
+    <a  href="/cart" (click)="getCart()" >
+      <svg aria-hidden="true" data-prefix="fas" data-icon="shopping-cart" class="svg-inline--fa fa-shopping-cart fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg>
+      <span class="cartQty">{{length}}</span>
+    </a>
+</div>
+<div class="cartDetails col-md-7">
+  <div class="headerCart">
+    My Cart ({{length}})
+    <hr>
+  </div>
+  <div class="cartBody" *ngFor="let mobile of mobiles;let i = index">
+    <div class="mobileImage">
+      <img [src]="mobile.images[0]" class="cart">
+    </div>  
+    <div class="mobileDetails">
+      <span class="name">{{mobile.name}}|{{mobile.manufacturer}}</span><span>({{mobile.internal}} GB)</span>
+      <p class="ram">{{mobile.ram}} GB RAM</p>
+
+      <h4>&#x20B9;. {{mobile.price * mobile.qty}}</h4>
+      <button  (click)="decCount(i)" [disabled]="isZero" class="btn btn-default form-control increaseBtn qtySpec">-</button>
+          <span class="qty qtySpec">{{mobile.qty}}</span>
+      <button  (click)="incCount(i)" class="btn btn-default form-control increaseBtn qtySpec">+</button>
+      <button class="btn btn-danger btn-sm remove" (click)="removeItem(mobile.mobile_id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="cartFooter">
+      <div >
+          <button class="btn btn-warning placeOrder" (click)="placeAnOrder()" >PLACE ORDER</button>
+          <button class="btn btn-primary placeOrder" (click)="continue()">< CONTINUE SHOPPING</button>
+      </div>
+  </div>
+</div>
+<div class="price col-md-4">
+  <div class="priceHeader">
+    Price Details
+    <hr>
+  </div>
+  <div class="priceBody">
+      <div class="amnt">
+          Price ({{length}} <span *ngIf="2>length">Item</span><span *ngIf="length>1">Items</span>)
+          <span style="padding-left:45%;font-weight: bold">{{total}}.&#x20B9;</span>
+      </div>
+      <div class="delivery">
+        Delivery Charges 
+        <span style="padding-left:52%;font-weight: bold;color: greenyellow">FREE</span>
+      </div>
+  </div>
+  <div class="priceFooter">
+      <div class="amnt" style="margin-top:5%">
+          Amount Payable
+          <span style="padding-left:40%;font-weight: bold;">{{total}}.&#x20B9;</span>
+      </div>
+  </div>
+</div>

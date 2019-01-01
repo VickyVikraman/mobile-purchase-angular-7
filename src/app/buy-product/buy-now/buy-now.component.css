@@ -1,0 +1,129 @@
+.buyNow{
+    margin-top:2%;
+    
+}
+.mail1{
+    margin:2%;
+    padding:2%;
+    height:142px;
+    box-shadow:0 0 0.2em darkgray;
+}
+.mail{
+    margin:2%;
+    padding:2%;
+    box-shadow:0 0 0.2em darkgray;
+    
+}
+.mailPayment
+{   
+    margin: 2%;
+    padding:2%;
+    box-shadow: 0 0 0.2em darkgrey;
+    max-height: 370px;
+}
+.inputOption{
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.add{
+    
+}
+.address{
+    padding:0% 5%;
+}
+
+.row {
+    margin:15px 0;
+    width:100%;
+  }
+  .align{
+      margin-left:2%;
+  }
+
+  .country{
+      width:205px;
+  }
+  .state{
+      width:205px;
+  }
+  .city{
+      width:205px;
+  }
+  .zip{
+      width:205px;
+  }
+  .email{
+    margin:2%;
+    box-shadow:0 0 0.2em darkgray;
+  } 
+  .mailOption{
+      padding:2% 1%;
+  }
+  .mobileImg{
+      float: left;
+      width:20%;
+  }
+  .buyImage{
+      width:100%;
+  }
+  .mobileDetails{
+      float: left;
+  }
+  .payment{
+      clear: both;
+      height: 240px;
+  }
+  .summary{
+      margin-left:2%;
+  }
+  .qty{
+      clear: both;
+  }
+  .increaseBtn
+{
+    width: 4%;
+    height: 45px;
+    cursor: pointer;
+    border-color: black;
+    border-radius: 40px;
+    text-align: -webkit-center;
+}
+
+.qtySpec{
+    border-color:black;
+    margin-right:2px;
+    padding: 2px 20px;
+    border: 1px solid gray;
+    vertical-align: middle;
+}
+.email{
+    float: left;
+}
+.mailAdd{
+    clear: both;
+    min-height:60px;
+}
+.arrange
+{
+    float: left;
+}
+
+.image
+{
+    margin-top: -20%;
+    float: right;
+    margin-right: 2%;
+}
+.card1
+{
+    padding:2%;
+}
+.invoiceLeft{
+    width:75%;
+}
+.invoiceRight{
+    width:25%;
+}
+.buyingMobile{
+    
+}

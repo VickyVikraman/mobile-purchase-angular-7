@@ -1,0 +1,102 @@
+<div *ngIf="showMePartially" class="mobileSection">
+  <div class="addMobile">
+    <div class="container">
+      <span class="cross" (click)="closeMobile()"><i class="fa fa-times" aria-hidden="true"></i></span>
+      <div class="row">
+        <div class="col-sm-12">
+          <form>
+            <div class="row col-md-12">
+              <div class="form-group col-md-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" [(ngModel)]="mobile.name" id="name" placeholder="Enter name of Mobile Phone"
+                  name="name">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="Manufacturer">Manufacturer:</label>
+                <input type="text" class="form-control" [(ngModel)]="mobile.manufacturer" id="Manufacturer" placeholder="Enter Manufacturer Name"
+                  name="manufacturer">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="os">Operating System</label>
+                <select class="form-control" [(ngModel)]="mobile.os" id="os" name="os" (change)="chooseOS($event.target.value)">
+                  <option value="Select OS">Select...</option>
+                  <option value="Android">Android</option>
+                  <option value="IOS">IOS</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="verison">Verison</label>
+                <select class="form-control" id="version" [(ngModel)]="mobile.version" name="version" (change)="chooseVersion($event.target.value)">
+                  <option *ngFor="let version of versions" [selected]="mobile.version == version.version">{{version.version}}</option>
+                </select>
+              </div>
+            </div>
+            <label for="storage">Storage</label>
+            <div class="row split" id="storage">
+              <div class="form-group col-md-4">
+                <label for="ram">RAM:</label>
+                <input type="number" class="form-control" [(ngModel)]="mobile.ram" id="ram" placeholder="Enter RAM capacity"
+                  name="ram">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="internal">Internal Storage:</label>
+                <input type="number" class="form-control" id="internal" [(ngModel)]="mobile.internal" placeholder="Enter internal storage capacity"
+                  name="internal">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="expand">Expandable Upto:</label>
+                <input type="number" class="form-control" id="expand" [(ngModel)]="mobile.expandable" placeholder="Enter Expandable capacity"
+                  name="expand">
+              </div>
+            </div>
+            <label for="dim">Dimension</label>
+            <div class="row split" id="dim">
+              <div class="form-group col-md-4">
+                <label for="width">Width:</label>
+                <input type="number" class="form-control" id="width" [(ngModel)]="mobile.width" placeholder="width in cms"
+                  name="width">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="depth">Depth:</label>
+                <input type="number" class="form-control" id="depth" [(ngModel)]="mobile.depth" placeholder="depth in cms"
+                  name="depth">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="height">Height:</label>
+                <input type="number" class="form-control" id="height" [(ngModel)]="mobile.height" placeholder="height in cms"
+                  name="height">
+              </div>
+            </div>
+            <label for="other">Other Details</label>
+            <div class="row split" id="other">
+              <div class="form-group col-md-3">
+                <label for="battery">Battery:</label>
+                <input type="number" class="form-control" id="battery" [(ngModel)]="mobile.battery" placeholder="Enter Baterry Capacity in mAh"
+                  name="battery">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="weight">Weight:</label>
+                <input type="number" class="form-control" id="weight" [(ngModel)]="mobile.weight" placeholder="Enter weight in gms"
+                  name="weight">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" [(ngModel)]="mobile.price" placeholder="Enter price"
+                  name="price">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="stock">In Stock:</label>
+                <input type="number" class="form-control" id="stock" [(ngModel)]="mobile.stock" placeholder="Enter Stock in Hold"
+                  name="stock">
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="file" multiple (change)="selectFile($event)">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

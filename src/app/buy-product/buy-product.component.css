@@ -1,0 +1,59 @@
+.listOfMobiles
+{
+    clear: both;
+    margin-top:2%;
+    border-bottom:1px solid gray;
+}
+
+.list
+{
+    float:left
+}
+.sepcs
+{
+    padding-top: 1%;
+    padding-left: 4%;
+}
+.price
+{
+    padding:40% 20%;
+}
+
+.imageList:hover
+{
+    transform: scale(1.15);
+}
+.listOfMobiles:hover{
+    cursor: pointer;
+    background-color:gray;
+}
+
+.imageList{
+    padding-top: 20%;
+}
+.cart
+{
+    width: 4%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.cart:hover
+{
+    width: 5%;
+}
+.cartQty
+{
+    left: 47%;
+    position: absolute;
+    background-color: white;
+    border-radius: 74%;
+    top: 13%;
+    height: 40%;
+    width: 40%;
+    text-align: center;
+}
+.cartProceed
+{
+    display:none;
+}
