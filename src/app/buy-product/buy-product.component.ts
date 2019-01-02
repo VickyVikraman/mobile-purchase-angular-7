@@ -24,6 +24,8 @@ export class BuyProductComponent implements OnInit {
   mobile:{
     images:[]
   }
+  out:boolean=false;
+  few:boolean=false;
   mobileId:any
   getCartItem()
   {
@@ -47,9 +49,42 @@ export class BuyProductComponent implements OnInit {
           perfectImage[i]="data:image/png;base64,"+imageArr[i];
         }
         this.mobiles[j].images=perfectImage;
+        if(this.mobiles[j].stock==0)
+        {
+          this.out=true;
+        }
+        if(this.mobiles[j].stock>=1 && this.mobiles[j].stock<10)
+        {
+          this.few=true;
+          console.log(this.few)
+        }
       }
       console.log(this.mobiles)
     });
+  }
+
+  OutOf(stock)
+  {
+      if(stock==0)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+  }
+
+  fewLeft(stock)
+  {
+    if(stock>=1 && stock<10)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
   }
 
   viewIndividual(id)

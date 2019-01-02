@@ -7,7 +7,7 @@ import { SellProductComponent } from './sell-product/sell-product.component';
 import { MapperComponent } from './mapper/mapper.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddMobileComponent } from './sell-product/add-mobile/add-mobile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './buy-product/cart/cart.component';
 import { ViewMobileComponent } from './buy-product/view-mobile/view-mobile.component';
 import { BuyNowComponent } from './buy-product/buy-now/buy-now.component';
@@ -29,6 +29,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
 
   ],

@@ -51,4 +51,10 @@ export class AppServiceService {
   {
     return this.http.get(MapperComponent.endPointURL+"/deleteMobile?&id="+id)
   }
+
+  buyNow(buyMobile)
+  {
+    console.log(buyMobile)
+    return this.http.post(MapperComponent.endPointURL+"/buy",buyMobile,httpOptions).toPromise()
+  }
 }

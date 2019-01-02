@@ -19,7 +19,6 @@
     margin: 2%;
     padding:2%;
     box-shadow: 0 0 0.2em darkgrey;
-    max-height: 370px;
 }
 .inputOption{
     padding-left: 20%;
@@ -71,7 +70,6 @@
   }
   .payment{
       clear: both;
-      height: 240px;
   }
   .summary{
       margin-left:2%;
@@ -110,9 +108,7 @@
 
 .image
 {
-    margin-top: -20%;
-    float: right;
-    margin-right: 2%;
+
 }
 .card1
 {
@@ -126,4 +122,7 @@
 }
 .buyingMobile{
     
+}
+.invalid-feedback{
+    display: inline;
 }

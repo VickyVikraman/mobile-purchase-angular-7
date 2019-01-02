@@ -4,96 +4,99 @@
       <span class="cross" (click)="closeMobile()"><i class="fa fa-times" aria-hidden="true"></i></span>
       <div class="row">
         <div class="col-sm-12">
-          <form>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit1()" >
             <div class="row col-md-12">
               <div class="form-group col-md-3">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" [(ngModel)]="mobile.name" id="name" placeholder="Enter name of Mobile Phone"
-                  name="name">
+                  <label for="name">Name:</label>
+                  <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" [(ngModel)]="mobile.name"  id="name" placeholder="Enter name of Mobile Phone" name="name"  />
+                  <div *ngIf="submitted && f.name.errors"  class="invalid-feedback">Name is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="Manufacturer">Manufacturer:</label>
-                <input type="text" class="form-control" [(ngModel)]="mobile.manufacturer" id="Manufacturer" placeholder="Enter Manufacturer Name"
-                  name="manufacturer">
+                <input type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="mobile.manufacturer" id="Manufacturer"  [ngClass]="{ 'is-invalid': submitted && f.manufacturer.errors }" placeholder="Enter Manufacturer Name" name="manufacturer">
+                <div *ngIf="submitted && f.manufacturer.errors"  class="invalid-feedback">Manufacturer is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="os">Operating System</label>
-                <select class="form-control" [(ngModel)]="mobile.os" id="os" name="os" (change)="chooseOS($event.target.value)">
-                  <option value="Select OS">Select...</option>
+                <select class="form-control" [(ngModel)]="mobile.os" id="os" name="os" formControlName="os" (change)="chooseOS($event.target.value)"  [ngClass]="{ 'is-invalid': submitted && f.os.errors }">
+                  <option value="">Select...</option>
                   <option value="Android">Android</option>
                   <option value="IOS">IOS</option>
                 </select>
+                <div *ngIf="submitted && f.os.errors"  class="invalid-feedback">OS is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="verison">Verison</label>
-                <select class="form-control" id="version" [(ngModel)]="mobile.version" name="version" (change)="chooseVersion($event.target.value)">
+                <select class="form-control" id="version" formControlName="version" [(ngModel)]="mobile.version" name="version" (change)="chooseVersion($event.target.value)"  [ngClass]="{ 'is-invalid': submitted && f.version.errors }">
                   <option *ngFor="let version of versions" [selected]="mobile.version == version.version">{{version.version}}</option>
                 </select>
+                <div *ngIf="submitted && f.version.errors"  class="invalid-feedback">Version is required</div>
+
               </div>
             </div>
             <label for="storage">Storage</label>
             <div class="row split" id="storage">
               <div class="form-group col-md-4">
                 <label for="ram">RAM:</label>
-                <input type="number" class="form-control" [(ngModel)]="mobile.ram" id="ram" placeholder="Enter RAM capacity"
-                  name="ram">
+                <input type="number" class="form-control" formControlName="ram" [(ngModel)]="mobile.ram" min="1" id="ram" placeholder="Enter RAM capacity" name="ram"  [ngClass]="{ 'is-invalid': submitted && f.ram.errors }">
+                <div *ngIf="submitted && f.ram.errors"  class="invalid-feedback">RAM is required</div>
               </div>
               <div class="form-group col-md-4">
                 <label for="internal">Internal Storage:</label>
-                <input type="number" class="form-control" id="internal" [(ngModel)]="mobile.internal" placeholder="Enter internal storage capacity"
-                  name="internal">
+                <input type="number" class="form-control" formControlName="internal" id="internal" min=1  [(ngModel)]="mobile.internal" placeholder="Enter internal storage capacity" name="internal"  [ngClass]="{ 'is-invalid': submitted && f.internal.errors }">
+                <div *ngIf="submitted && f.internal.errors"  class="invalid-feedback">Internal Storage is required</div>
               </div>
               <div class="form-group col-md-4">
                 <label for="expand">Expandable Upto:</label>
-                <input type="number" class="form-control" id="expand" [(ngModel)]="mobile.expandable" placeholder="Enter Expandable capacity"
-                  name="expand">
+                <input type="number" class="form-control" formControlName="expandable" min="1" id="expand" [(ngModel)]="mobile.expandable" placeholder="Enter Expandable capacity" name="expand"  [ngClass]="{ 'is-invalid': submitted && f.expandable.errors }">
+                <div *ngIf="submitted && f.expandable.errors"  class="invalid-feedback">Expandable Storage is required</div>
               </div>
             </div>
             <label for="dim">Dimension</label>
             <div class="row split" id="dim">
               <div class="form-group col-md-4">
                 <label for="width">Width:</label>
-                <input type="number" class="form-control" id="width" [(ngModel)]="mobile.width" placeholder="width in cms"
-                  name="width">
+                <input type="number" class="form-control" formControlName="width" min="1" id="width" [(ngModel)]="mobile.width" placeholder="width in cms" name="width"  [ngClass]="{ 'is-invalid': submitted && f.width.errors }">
+                <div *ngIf="submitted && f.width.errors"  class="invalid-feedback">Width is required</div>
               </div>
               <div class="form-group col-md-4">
                 <label for="depth">Depth:</label>
-                <input type="number" class="form-control" id="depth" [(ngModel)]="mobile.depth" placeholder="depth in cms"
-                  name="depth">
+                <input type="number" class="form-control" formControlName="depth" min="1" id="depth" [(ngModel)]="mobile.depth" placeholder="depth in cms" name="depth"  [ngClass]="{ 'is-invalid': submitted && f.depth.errors }">
+                <div *ngIf="submitted && f.depth.errors"  class="invalid-feedback">Depth is required</div>
               </div>
               <div class="form-group col-md-4">
                 <label for="height">Height:</label>
-                <input type="number" class="form-control" id="height" [(ngModel)]="mobile.height" placeholder="height in cms"
-                  name="height">
+                <input type="number" class="form-control" formControlName="height" min="1" id="height" [(ngModel)]="mobile.height" placeholder="height in cms" name="height"  [ngClass]="{ 'is-invalid': submitted && f.height.errors }">
+                <div *ngIf="submitted && f.height.errors"  class="invalid-feedback">Height is required</div>
               </div>
             </div>
             <label for="other">Other Details</label>
             <div class="row split" id="other">
               <div class="form-group col-md-3">
                 <label for="battery">Battery:</label>
-                <input type="number" class="form-control" id="battery" [(ngModel)]="mobile.battery" placeholder="Enter Baterry Capacity in mAh"
-                  name="battery">
+                <input type="number" class="form-control" formControlName="battery" id="battery" [(ngModel)]="mobile.battery" placeholder="Enter Baterry Capacity in mAh" name="battery"  [ngClass]="{ 'is-invalid': submitted && f.battery.errors }">
+                <div *ngIf="submitted && f.battery.errors"  class="invalid-feedback">Battery is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="weight">Weight:</label>
-                <input type="number" class="form-control" id="weight" [(ngModel)]="mobile.weight" placeholder="Enter weight in gms"
-                  name="weight">
+                <input type="number" class="form-control" formControlName="weight" id="weight" [(ngModel)]="mobile.weight" placeholder="Enter weight in gms" name="weight"  [ngClass]="{ 'is-invalid': submitted && f.weight.errors }">
+                <div *ngIf="submitted && f.weight.errors"  class="invalid-feedback">Weight is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="price">Price:</label>
-                <input type="number" class="form-control" id="price" [(ngModel)]="mobile.price" placeholder="Enter price"
-                  name="price">
+                <input type="number" class="form-control" formControlName="price" id="price" [(ngModel)]="mobile.price" placeholder="Enter price" name="price"  [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+                <div *ngIf="submitted && f.price.errors"  class="invalid-feedback">Price is required</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="stock">In Stock:</label>
-                <input type="number" class="form-control" id="stock" [(ngModel)]="mobile.stock" placeholder="Enter Stock in Hold"
-                  name="stock">
+                <input type="number" class="form-control" formControlName="stock" id="stock" [(ngModel)]="mobile.stock" placeholder="Enter Stock in Hold" name="stock"  [ngClass]="{ 'is-invalid': submitted && f.stock.errors }">
+                <div *ngIf="submitted && f.stock.errors"  class="invalid-feedback">Stock is required</div>
               </div>
             </div>
             <div class="form-group">
               <input type="file" multiple (change)="selectFile($event)">
             </div>
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm" >Submit</button>
           </form>
         </div>
       </div>

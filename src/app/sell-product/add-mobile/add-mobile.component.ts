@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AddMobileService } from './add-mobile.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-mobile',
@@ -9,13 +10,44 @@ import { AddMobileService } from './add-mobile.service';
 export class AddMobileComponent implements OnInit {
 
   @Input() showMePartially: boolean;
+  registerForm: FormGroup;
+  submitted = false;
 
-  constructor(private addMobileService: AddMobileService) { }
+  constructor(private addMobileService: AddMobileService,private formBuilder: FormBuilder) { }
   image:boolean;
   ngOnInit() {
     this.editable
-  }
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      manufacturer:['',Validators.required],
+      os:['',Validators.required],
+      version:['',Validators.required],
+      ram:['',Validators.required],
+      internal:['',Validators.required],
+      expandable:['',Validators.required],
+      width:['',Validators.required],
+      depth:['',Validators.required],
+      height:['',Validators.required],
+      battery:['',Validators.required],
+      weight:['',Validators.required],
+      price:['',Validators.required],
+      stock:['',Validators.required],
 
+
+  });
+  }
+  get f() { return this.registerForm.controls; }
+
+   onSubmit1() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        console.log(this.mobile)
+    }
   closeMobile() {
     this.showMePartially = false;
   }
@@ -33,8 +65,9 @@ export class AddMobileComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       var file = files[i];
       if (files && file) {
-        var reader = new FileReader();
-
+        var reader = new FileReader();  
+        console.log("Size:"+file.size)
+        console.log("Size:"+file.type)
         reader.onload = this._handleReaderLoaded.bind(this);
 
         reader.readAsBinaryString(file);

@@ -19,10 +19,12 @@
       <img [src]="viwedImage" class="viwedImg">
     </div>  
     <div class="mobileFooter">
-      <button class="btn btn-warning button" *ngIf="!this.cartMobile.includes(mobile.mobile_id)" (click)="addToCart(mobile.mobile_id)" ><span><i class="fa fa-cart-plus" aria-hidden="true"></i>
+      <button class="btn btn-warning button btn-sm" *ngIf="!this.cartMobile.includes(mobile.mobile_id)" (click)="addToCart(mobile.mobile_id)" ><span><i class="fa fa-cart-plus" aria-hidden="true"></i>
       </span>  ADD TO CART</button>
-      <button class="btn btn-warning button" *ngIf="this.cartMobile.includes(mobile.mobile_id)" (click)="goTo()">GO TO CART</button>
-      <button class="btn btn-success button" (click)="buyNow()" >BUY NOW</button>
+      <button class="btn btn-warning button btn-sm" *ngIf="this.cartMobile.includes(mobile.mobile_id)" (click)="goTo()">GO TO CART</button>
+      <button class="btn btn-success button btn-sm" (click)="buyNow()" [disabled]="out" >BUY NOW</button>
+      <span style="color: red"  *ngIf="out" >Out Of Stock!</span>
+      <span style="color: red" *ngIf="few">Only {{mobile.stock}} left</span>
     </div>
   </div>
   <div class="specs">

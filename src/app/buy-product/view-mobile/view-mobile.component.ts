@@ -15,6 +15,8 @@ export class ViewMobileComponent implements OnInit {
   viewId:any;
   mobile:any;
   cartMobile:any;
+  out:boolean=false;
+  few:boolean=false;
   ngOnInit() {
     this.route.queryParams.subscribe(param=>{
         this.getMobile(param['id'])
@@ -30,6 +32,14 @@ export class ViewMobileComponent implements OnInit {
         for(let i=0;i<imageArr.length;i++)
         {
           perfectImage[i]="data:image/jpeg;base64,"+imageArr[i];
+        }
+        if(this.mobile.stock==0)
+        {
+          this.out=true;
+        }
+        if(this.mobile.stock>=1 && this.mobile.stock<10)
+        {
+          this.few=true;
         }
         console.log(perfectImage)
         this.mobile.images=perfectImage;

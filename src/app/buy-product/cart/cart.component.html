@@ -18,16 +18,16 @@
       <p class="ram">{{mobile.ram}} GB RAM</p>
 
       <h4>&#x20B9;. {{mobile.price * mobile.qty}}</h4>
-      <button  (click)="decCount(i)" [disabled]="isZero" class="btn btn-default form-control increaseBtn qtySpec">-</button>
+      <button  (click)="decCount(i)" [disabled]="isZero" class="btn btn-default form-control btn-sm increaseBtn qtySpec">-</button>
           <span class="qty qtySpec">{{mobile.qty}}</span>
-      <button  (click)="incCount(i)" class="btn btn-default form-control increaseBtn qtySpec">+</button>
+      <button  (click)="incCount(i)" class="btn btn-default form-control increaseBtn btn-sm qtySpec">+</button>
       <button class="btn btn-danger btn-sm remove" (click)="removeItem(mobile.mobile_id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
   </div>
   <div class="cartFooter">
       <div >
-          <button class="btn btn-warning placeOrder" (click)="placeAnOrder()" >PLACE ORDER</button>
-          <button class="btn btn-primary placeOrder" (click)="continue()">< CONTINUE SHOPPING</button>
+          <button class="btn btn-warning btn-sm placeOrder" (click)="placeAnOrder()" >PLACE ORDER</button>
+          <button class="btn btn-primary btn-sm placeOrder" (click)="continue()">&lt; CONTINUE SHOPPING</button>
       </div>
   </div>
 </div>

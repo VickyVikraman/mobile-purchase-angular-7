@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppServiceService } from 'src/app/app-service.service';
 import {NgbModal, ModalDismissReasons,NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-buy-now',
@@ -10,19 +11,33 @@ import {NgbModal, ModalDismissReasons,NgbCarouselConfig} from '@ng-bootstrap/ng-
 })
 export class BuyNowComponent implements OnInit {
 
-  constructor(private route : ActivatedRoute,private service : AppServiceService,private modalService : NgbModal) { }
+  constructor(private route : ActivatedRoute,private service : AppServiceService,private modalService : NgbModal,private formBuilder : FormBuilder) { }
   
+  addAddress:FormGroup;
+  submitted=false;
+
   ngOnInit() {
     this.route.queryParams.subscribe(param=>{
-      if(param['cart']==0)
-      {
-        this.getMobile(param['id'])
-      }
-      else{
-          this.getAllMobile();
-      }
-  })
+        if(param['cart']==0)
+        {
+          this.getMobile(param['id'])
+        }
+        else{
+            this.getAllMobile();
+        }
+    })
+    this.addAddress = this.formBuilder.group({
+      name: ['', Validators.required],
+      number: ['',[ Validators.required,Validators.minLength(10)]],
+      country: ['', Validators.required],
+      state: ['',Validators.required],
+      city:['',Validators.required],
+      zip:['',[Validators.required,Validators.minLength(6)]],
+      street:['',Validators.required]
+    })
   }
+  get f() { return this.addAddress.controls; }
+
   selectedCountry = 0;
   selectedState = 0;
   selectedCity=0;
@@ -213,6 +228,11 @@ model:any = {}
   }
   
   continueToSummary(){
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.addAddress.invalid) {
+        return;
+    }
     this.proceed=false;
     let countries = this.getCountries();
     let states = this.getStates();
@@ -335,5 +355,46 @@ model:any = {}
       </html>`
     );
     popupWin.document.close();
+  }
+  checkoutWith()
+  {
+    let buyMobile=[];
+    this.mobiles.forEach(function(data){
+      let mobile={
+        // qty:Number,
+        // id:Number
+      };
+      let stock=data.stock-data.qty
+      mobile.qty=stock
+      mobile.id=data.mobile_id;
+      buyMobile.push(mobile)
+      console.log(data.stock)
+      console.log(mobile.qty);
+    })
+    this.service.buyNow(buyMobile);
+
+    let printContents, popupWin;
+    window.location.href="/cart"
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    this.todayDate=new Date();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+    <body style="align-items:center" onload="window.print();window.close()">
+      ${printContents}
+    </body>
+      </html>`
+    );
+    popupWin.document.close();
+    window.location.href="/buy"
   }
 }

@@ -22,11 +22,13 @@
       </ul>
     </div>
     <div class="col-md-2 list ">
-        <h5 class="price"> &#x20B9;. {{mobile.price}}</h5>
+        <h5 class="price" style="font-size:1em"> &#x20B9;. {{mobile.price}}</h5>
     </div>
     <div class="col-md-2 list">
       <div class="price" >
-        <button class="btn btn-primary" [disabled]="this.mobileId.includes(mobile.mobile_id)"  (click)="addToCart(mobile.mobile_id)">Add To Cart</button>
+        <button class="btn btn-primary btn-sm" [disabled]="this.mobileId.includes(mobile.mobile_id)"  (click)="addToCart(mobile.mobile_id)">Add To Cart</button>
+        <span style="color: red;font-size: 0.7em" *ngIf="OutOf(mobile.stock)" >Out Of Stock!</span >
+        <span style="color: red;font-size: 0.7em" *ngIf="fewLeft(mobile.stock)" >Only {{mobile.stock}} left</span>
       </div>
     </div>
   </div>

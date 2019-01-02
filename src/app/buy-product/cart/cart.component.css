@@ -36,10 +36,10 @@ img{
 }
 .increaseBtn
 {
-    width: 21%;
-    height: 40px;
+    width: 17%;
+    height: 30px;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 16px;
     text-align: -webkit-center;
 }
 .qty{

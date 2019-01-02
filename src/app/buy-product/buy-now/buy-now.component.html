@@ -14,7 +14,7 @@
             </div>
           </div>
           <div style="float: right;">
-            <button class="btn btn-primary">CONTINUE</button>
+            <button class="btn btn-primary btn-sm">CONTINUE</button>
           </div>
         </form>
       </div>
@@ -23,7 +23,7 @@
           {{mailId}}
         </div>
         <div style="float:right;margin-right:2%">
-          <button class="btn btn-primary" (click)="changeMail()">CHANGE</button>
+          <button class="btn btn-primary btn-sm" (click)="changeMail()">CHANGE</button>
         </div>
       </div>
     </div>
@@ -31,50 +31,59 @@
         <label for="address">ADDRESS</label>
         <span *ngIf="addressEntered" ><i class="fa fa-check" aria-hidden="true"></i></span>
         <div class="inputOption add" *ngIf="addressView" id="address">
-          <form  (submit)="continueToSummary()" >
+          <form  (ngSubmit)="continueToSummary()" [formGroup]="addAddress"  >
               <div class="row">
                 <div class="form-group align">
                     <label class="control-label" for="name">Name</label>
-                    <input type="text" name="name" [(ngModel)]="address.name"  id="name" class="form-control col-md-12" required />
+                    <input type="text" name="name" formControlName="name" [(ngModel)]="address.name"  id="name" class="form-control col-md-12" required />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">Name is required</div>
                 </div>
                 <div class="form-group align">
                     <label class="control-label" for="number">Phone Number</label>
-                    <input type="text" name="number" id="number" (keypress)="keyPress($event)" [(ngModel)]="address.phone" minlength=10 maxlength=10 class="form-control  required"/>
+                    <input type="text" name="number" formControlName="number" id="number" (keypress)="keyPress($event)" [(ngModel)]="address.phone" minlength=10 maxlength=10 class="form-control  required"/>
+                    <div *ngIf="submitted && f.number.errors" class="invalid-feedback">Phone Number is required</div>
+                    <div *ngIf="submitted && f.number.errors.minlength" class="invalid-feedback">Phone Number must be at least 10 digit</div>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group align">
                   <label class="control-label" for="Country">Country:</label>
-                  <select *ngIf="getCountries()" [(ngModel)]="address.selectedCountry" name="country" (change)="onSelectCountry($event.target.value)" class="form-control col-md-12 country" id="country" required>
+                  <select *ngIf="getCountries()" formControlName="country" [(ngModel)]="address.selectedCountry" name="country" (change)="onSelectCountry($event.target.value)" class="form-control col-md-12 country" id="country" required>
                     <option value="0">Select Country</option>
                     <option *ngFor="let country of getCountries()" value={{country.id}} [selected]="address.selectedCountry==country.id" >{{country.name}}</option>
                   </select>
+                  <div *ngIf="submitted && f.country.errors" class="invalid-feedback">Country is required</div>
                 </div>
                 <div class="form-group align">
                   <label class="control-label" for="States">States:</label>
-                  <select *ngIf="states" [(ngModel)]="address.selectedState" name="state" (change)="onSelectState($event.target.value)" class="form-control col-md-12 state" id="state" required>
+                  <select *ngIf="states" formControlName="state" [(ngModel)]="address.selectedState" name="state" (change)="onSelectState($event.target.value)" class="form-control col-md-12 state" id="state" required>
                       <option value="0">Select State</option>
                     <option *ngFor="let state of states" value= {{state.id}} [selected]="state.id==address.selectedState" >{{state.name}}</option>
                   </select>
+                  <div *ngIf="submitted && f.state.errors" class="invalid-feedback">State is required</div>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group align">
                     <label class="control-label" for="City">City:</label>
-                    <select class="form-control input-lg city" id="city"  [(ngModel)]="address.selectedCity" name="city"  (change)="onSelectCity($event.target.value)" required>
+                    <select class="form-control input-lg city" id="city" formControlName="city"  [(ngModel)]="address.selectedCity" name="city"  (change)="onSelectCity($event.target.value)" required>
                         <option *ngIf="!selectedState" value="0">Select City</option>
                         <option *ngFor="let city of cities" value= {{city.id}}>{{city.name}}</option>
                     </select>
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">City is required</div>
                   </div>
                 <div class="form-group align">
                     <label class="control-label" for="zip">Zip</label>
-                    <input type="text" name="zip" (keypress)="zipPress($event)" [(ngModel)]="address.zip" minlength=6 maxlength=6 id="zip" class="form-control input-lg zip" required/>
+                    <input type="text" name="zip" formControlName="zip" (keypress)="zipPress($event)" [(ngModel)]="address.zip" minlength=6 maxlength=6 id="zip" class="form-control input-lg zip" required/>
+                    <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">Zip Code is required</div>
+                    <div *ngIf="f.zip.errors.minlength" class="invalid-feedback">Zip must be at least 6 characters</div>
                 </div>
               </div>
               <div class="row">
                   <div class="form-group align">
                       <label class="control-label" for="address">Flat No,Street & City</label>
-                      <input type="text" name="address" id="address" [(ngModel)]="address.street" class="form-control input-lg col-md-12 " required/>
+                      <input type="text" name="address" formControlName="street" id="address" [(ngModel)]="address.street" class="form-control input-lg col-md-12 " required/>
+                      <div *ngIf="submitted && f.street.errors" class="invalid-feedback">Street is required</div>
                     </div>
               </div>
               <div class="form-group">
@@ -83,7 +92,7 @@
             </form>
         </div>
         <div style="float:right;margin-right:3%" *ngIf="addressChange">
-            <button class="btn btn-primary" style="margin-top:8%" (click)="changeAddress()" >CHANGE</button>
+            <button class="btn btn-primary btn-sm" style="margin-top:8%" (click)="changeAddress()" >CHANGE</button>
           </div>
     </div>
     <div class="mail">
@@ -103,17 +112,17 @@
               <h6>&#x20B9;. {{mobile.price * mobile.qty }}</h6>
           </div>
           <div class="qty">
-              <button  (click)="decCount(i)" [disabled]="isZero" class="btn btn-default form-control increaseBtn qtySpec"><span style="margin-left:-3px">-</span></button>
+              <button  (click)="decCount(i)" [disabled]="isZero" class="btn btn-default btn-sm form-control increaseBtn qtySpec"><span style="margin-left:-3px">-</span></button>
               <span class="qty qtySpec">{{mobile.qty}}</span>
-              <button  (click)="incCount(i)" class="btn btn-default form-control increaseBtn qtySpec"><span style="margin-left:-3px">+</span></button>
+              <button  (click)="incCount(i)" class="btn btn-default form-control btn-sm increaseBtn qtySpec"><span style="margin-left:-3px">+</span></button>
           </div>
         </div>
           <div class="form-group" style="margin-top:1em">
-              <button class="btn btn-primary"  (click)="continueToPayment()" >CONTINUE</button>
+              <button class="btn btn-primary btn-sm"  (click)="continueToPayment()" >CONTINUE</button>
           </div>
       </div>
       <div style="float:right;margin-right:2%" *ngIf="changeOrder">
-          <button class="btn btn-primary" (click)="changeOrderFunc()" >CHANGE</button>
+          <button class="btn btn-primary btn-sm" (click)="changeOrderFunc()" >CHANGE</button>
       </div>
     </div>
     <div class="mailPayment">
@@ -125,7 +134,7 @@
       <div class="payment" *ngIf="paymentView" id="payment">
           <div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" [value]="true"  id="inlineRadio1" (click)="setRadio('cod')" value="option1" ngModel>
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" (click)="setRadio('cod')" value="option1" checked>
                   <label class="form-check-label" for="inlineRadio1">Cash On Delivery</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -185,7 +194,6 @@
                 </div>
               </div>
             </div>
-              <br>
               <div class="form-group image" id="credit_cards">
                   <img src="assets/images/visa.jpg" id="visa">
                   <img src="assets/images/mastercard.jpg" id="mastercard">
@@ -203,8 +211,8 @@
             </div>
           </div>
       </div>
-      <div class="form-group" *ngIf="proceed" style="margin-left:2%;">
-          <button class="btn btn-primary" (click)="proceedToPay(cartContent)">PROCEED TO PAY</button>
+      <div class="form-group" *ngIf="proceed" style="margin-left:2%;margin-top:2%">
+          <button class="btn btn-primary btn-sm" (click)="proceedToPay(cartContent)">PROCEED TO PAY</button>
       </div>
   </div>
 </div>
@@ -238,8 +246,8 @@
             <hr>
             <div class="invoiceBody">
               <div class="orderedItem">
-                <table class="table">
-                  <thead>
+                <table class="table table-striped">
+                  <thead class="thead-dark">
                     <tr>
                       <th>#</th>
                       <th>Item Description</th>
@@ -264,7 +272,7 @@
     </div>
     <div class="modal-footer">
       <form   (submit)="modal.close('Save click')">
-        <button class="btn btn-warning btn-lg " [disabled]="disabled" (click)="checkoutWith(invoice)">Proceed To Pay</button>
+        <button class="btn btn-warning btn-sm " [disabled]="disabled" (click)="checkoutWith()">PRINT INVOICE</button>
       </form>
     </div>
   </ng-template>
