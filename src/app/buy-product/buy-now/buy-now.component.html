@@ -42,7 +42,7 @@
                     <label class="control-label" for="number">Phone Number</label>
                     <input type="text" name="number" formControlName="number" id="number" (keypress)="keyPress($event)" [(ngModel)]="address.phone" minlength=10 maxlength=10 class="form-control  required"/>
                     <div *ngIf="submitted && f.number.errors" class="invalid-feedback">Phone Number is required</div>
-                    <div *ngIf="submitted && f.number.errors.minlength" class="invalid-feedback">Phone Number must be at least 10 digit</div>
+                    <span *ngIf="submitted && f.number.errors.minlength && (!f.number.errors)" class="invalid-feedback">Phone Number must be at least 10 digit</span>
                 </div>
               </div>
               <div class="row">
@@ -76,7 +76,7 @@
                     <label class="control-label" for="zip">Zip</label>
                     <input type="text" name="zip" formControlName="zip" (keypress)="zipPress($event)" [(ngModel)]="address.zip" minlength=6 maxlength=6 id="zip" class="form-control input-lg zip" required/>
                     <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">Zip Code is required</div>
-                    <div *ngIf="f.zip.errors.minlength" class="invalid-feedback">Zip must be at least 6 characters</div>
+                    <!-- <div *ngIf="submitted && f.zip.errors.minlength" class="invalid-feedback">Zip must be at least 6 characters</div> -->
                 </div>
               </div>
               <div class="row">

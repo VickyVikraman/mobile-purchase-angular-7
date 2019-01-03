@@ -4,6 +4,7 @@
     background-color: #00b386;
     padding: 1% 2%;
     color: black;
+    border-radius:10px;
 }
 .link:hover{
     background-color:  #00e6ac;

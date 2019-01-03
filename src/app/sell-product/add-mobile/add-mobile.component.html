@@ -4,7 +4,7 @@
       <span class="cross" (click)="closeMobile()"><i class="fa fa-times" aria-hidden="true"></i></span>
       <div class="row">
         <div class="col-sm-12">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit1()" >
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
             <div class="row col-md-12">
               <div class="form-group col-md-3">
                   <label for="name">Name:</label>
@@ -28,6 +28,7 @@
               <div class="form-group col-md-3">
                 <label for="verison">Verison</label>
                 <select class="form-control" id="version" formControlName="version" [(ngModel)]="mobile.version" name="version" (change)="chooseVersion($event.target.value)"  [ngClass]="{ 'is-invalid': submitted && f.version.errors }">
+                  <option value="">Select...</option>
                   <option *ngFor="let version of versions" [selected]="mobile.version == version.version">{{version.version}}</option>
                 </select>
                 <div *ngIf="submitted && f.version.errors"  class="invalid-feedback">Version is required</div>
@@ -94,7 +95,7 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="file" multiple (change)="selectFile($event)">
+              <input type="file" multiple (change)="selectFile($event)" >
             </div>
             <button type="submit" class="btn btn-primary btn-sm" >Submit</button>
           </form>

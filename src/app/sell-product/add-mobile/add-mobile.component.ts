@@ -36,24 +36,31 @@ export class AddMobileComponent implements OnInit {
 
   });
   }
-  get f() { return this.registerForm.controls; }
-
-   onSubmit1() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-
-        console.log(this.mobile)
-    }
-  closeMobile() {
-    this.showMePartially = false;
-  }
   mobile: any = {
     file: []
   };
+  get f() { return this.registerForm.controls; }
+
+   
+  closeMobile() {
+    this.showMePartially = false;
+    this.mobile.name="";
+    this.mobile.manufacturer=""
+    this.mobile.os=""
+    this.mobile.version=""
+    this.mobile.ram="";
+    this.mobile.internal="";
+    this.mobile.expandable="";
+    this.mobile.width=""
+    this.mobile.depth="";
+    this.mobile.height="";
+    this.mobile.battery="";
+    this.mobile.weight="";
+    this.mobile.price="";
+    this.mobile.stock=""
+  
+  }
+  
   private base64textString: String = "";
   imgSrc: {};
   editable:boolean;
@@ -83,6 +90,14 @@ export class AddMobileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        console.log(this.mobile)
     if(!this.editable)
     {
       this.addMobileService.addMobile(this.mobile)
